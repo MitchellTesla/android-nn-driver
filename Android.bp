@@ -1,0 +1,89 @@
+//
+// Copyright © 2017 ARM Ltd. All rights reserved.
+// SPDX-License-Identifier: MIT
+//
+
+////////////////////////////////////////////
+//                                        //
+//           static boost libs            //
+//                                        //
+////////////////////////////////////////////
+cc_defaults {
+    name: "libboost-defaults",
+    proprietary: true,
+    export_include_dirs: ["boost_1_64_0"],
+    cflags: [
+        "-O3",
+        "-fexceptions",
+        "-Wno-unused-parameter",
+        "-DBOOST_NO_AUTO_PTR"
+    ],
+    cppflags: [
+        "-std=c++14"
+    ],
+    rtti: true,
+}
+
+cc_library_static {
+    name: "libboost_unit_test_framework",
+    defaults: ["libboost-defaults"],
+    srcs: [
+        "boost_1_64_0/libs/test/src/compiler_log_formatter.cpp",
+        "boost_1_64_0/libs/test/src/framework.cpp",
+        "boost_1_64_0/libs/test/src/results_reporter.cpp",
+        "boost_1_64_0/libs/test/src/unit_test_main.cpp",
+        "boost_1_64_0/libs/test/src/cpp_main.cpp",
+        "boost_1_64_0/libs/test/src/junit_log_formatter.cpp",
+        "boost_1_64_0/libs/test/src/test_main.cpp",
+        "boost_1_64_0/libs/test/src/unit_test_monitor.cpp",
+        "boost_1_64_0/libs/test/src/debug.cpp",
+        "boost_1_64_0/libs/test/src/plain_report_formatter.cpp",
+        "boost_1_64_0/libs/test/src/test_tools.cpp",
+        "boost_1_64_0/libs/test/src/unit_test_parameters.cpp",
+        "boost_1_64_0/libs/test/src/decorator.cpp",
+        "boost_1_64_0/libs/test/src/progress_monitor.cpp",
+        "boost_1_64_0/libs/test/src/test_tree.cpp",
+        "boost_1_64_0/libs/test/src/xml_log_formatter.cpp",
+        "boost_1_64_0/libs/test/src/execution_monitor.cpp",
+        "boost_1_64_0/libs/test/src/results_collector.cpp",
+        "boost_1_64_0/libs/test/src/unit_test_log.cpp",
+        "boost_1_64_0/libs/test/src/xml_report_formatter.cpp",
+    ],
+}
+
+////////////////////////////////////////////
+//                                        //
+//           flatbuffers libs             //
+//                                        //
+////////////////////////////////////////////
+cc_defaults {
+    name: "libflatbuffers-defaults",
+    proprietary: true,
+    export_include_dirs: [ "flatbuffers-1.12.0/",
+                           "flatbuffers-1.12.0/include",
+    ],
+    local_include_dirs: ["flatbuffers-1.12.0/include",],
+    cflags: [
+        "-O3",
+        "-fexceptions",
+        "-Wno-unused-parameter",
+        "-DFLATBUFFERS_BUILD_FLATC=1"
+    ],
+    cppflags: [
+        "-std=c++14"
+    ],
+    rtti: true,
+}
+
+cc_library_static {
+    name: "libflatbuffers-framework",
+    defaults: ["libflatbuffers-defaults"],
+    srcs: [
+        "flatbuffers-1.12.0/src/flatc.cpp",
+        "flatbuffers-1.12.0/src/flatc_main.cpp",
+    ],
+}
+
+subdirs = [
+    "armnn",
+]
